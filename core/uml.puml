@@ -1,0 +1,38 @@
+@startuml
+
+!include <c4/C4_Context>
+!include <c4/C4_Container>
+
+'LAYOUT_WITH_LEGEND()
+'LAYOUT_VERTICAL_COMPACT()
+
+' Actors
+actor User as user
+actor Admin as admin
+actor Vendor as vendor
+
+' Use Cases
+User -> (View Products) : View Products
+User -> (Search Products) : Search Products
+User -> (View Categories) : View Categories
+User -> (View Subcategories) : View Subcategories
+User -> (Add to Wishlist) : Add to Wishlist
+User -> (Write Review) : Write Review
+User -> (Add to Cart) : Add to Cart
+User -> (Place Order) : Place Order
+User -> (View Orders) : View Orders
+
+Admin --> (Manage Categories) : Manage Categories
+Admin --> (Manage Subcategories) : Manage Subcategories
+Admin --> (Manage Products) : Manage Products
+Admin --> (Manage Vendors) : Manage Vendors
+Admin --> (Manage Users) : Manage Users
+Admin --> (Manage Reviews) : Manage Reviews
+Admin --> (Manage Orders) : Manage Orders
+
+Vendor --> (Manage Products) : Manage Products
+Vendor --> (View Orders) : View Orders
+Vendor --> (Update Order Status) : Update Order Status
+Vendor --> (Manage Account) : Manage Account
+
+@enduml

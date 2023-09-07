@@ -1,0 +1,176 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--====== App Content ======-->
+    <div class="app-content">
+
+        <!--====== Section 1 ======-->
+        <div class="u-s-p-y-60">
+
+            <!--====== Section Content ======-->
+            <div class="section__content">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <div class="breadcrumb__wrap">
+                            <ul class="breadcrumb__list">
+                                <li class="has-separator">
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li class="is-marked">
+                                    <a href="dash-address-book.html">My Account</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--====== End - Section 1 ======-->
+
+        <!--====== Section 2 ======-->
+        <div class="u-s-p-b-60">
+
+            <!--====== Section Content ======-->
+            <div class="section__content">
+                <div class="dash">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12">
+
+                                <!--====== Dashboard Features ======-->
+                                <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
+                                    <div class="dash__pad-1">
+                                        <ul class="dash__f-list">
+                                            <li>
+                                                <a class="dash" href="{% url 'core:dashboard' %}">Manage My Account</a>
+                                            </li>
+                                            <li>
+                                                <a class="dash-active" href="{% url 'core:addressbook' %}">Address Book</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'userauths:sign-out' %}">Log out</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--====== End - Dashboard Features ======-->
+                            </div>
+                            <div class="col-lg-9 col-md-12">
+                                <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
+                                    <div class="dash__pad-2">
+                                        <div class="dash__address-header">
+                                            <h1 class="dash__h1">Address Book</h1>
+                                            <div>
+                                                <span class="dash__link dash__link--black u-s-m-r-8">
+                                                    <a href="dash-address-make-default.html">Make default shipping address</a>
+                                                </span>
+                                                <span class="dash__link dash__link--black">
+                                                    <a href="dash-address-make-default.html">Make default shipping address</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dash__box dash__box--shadow dash__box--bg-white dash__box--radius u-s-m-b-30">
+                                    <div class="dash__table-2-wrap gl-scroll">
+                                        <table class="dash__table-2">
+                                            <thead>
+                                                <tr>
+                                                
+                        
+                                                    <th>Address</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Email</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                         
+                                                {% for a in address %}
+
+                                                <tr>
+                                                
+                                                    <td>{{a.address}}</td>
+                                                    
+                                                    <td>{{a.contact_no}}</td>
+                                                    <td>{{a.email}}</td>
+                                                    <td>
+                                                        {{a.status}}
+                                                    </td>
+                                                </tr>
+                                                {% endfor%}
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="dash__custom-link btn--e-brand-b-2" href="dash-address-add.html">
+                                        <i class="fas fa-plus u-s-m-r-8"></i>
+                                        <span>Add New Address</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--====== End - Section Content ======-->
+        </div>
+        <!--====== End - Section 2 ======-->
+
+    </div>
+    <!--====== End - App Content ======-->
+
+    <div id="new-address-form" style="display: none; align-item: center; justify-content: center;" >
+        <div class="col-lg-9 col-md-12">
+            <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white">
+                <div class="dash__pad-2">
+                    <h1 class="dash__h1 u-s-m-b-14">Add new Address</h1>
+                    <span class="dash__text u-s-m-b-30">We need an address where we could deliver products.</span>
+                    <form class="dash-address-manipulation" mwthod="POST">{% csrf_token %}
+                  
+                        <div class="gl-inline">
+                            <div class="u-s-m-b-30">
+                                <label class="gl-label" for="address-address">Address *</label>
+                                <input class="input-text input-text--primary-style" type="text" id="address-address" name="address" placeholder="Your Address">
+                            </div>
+                            <div class="u-s-m-b-30">
+                                <label class="gl-label" for="address-phone" >Phone *</label>
+                                <input class="input-text input-text--primary-style" type="text" id="address-phone" name="phoneno">
+                            </div>
+                        </div>
+                        <div class="gl-inline">
+                            <div class="u-s-m-b-30">
+                                <label class="gl-label" for="address-email">Email *</label>
+                                <input class="input-text input-text--primary-style" type="text"  id="address-email" name="email" placeholder="exapmle@example.com">
+                            </div>
+                           
+                        </div>
+                        <div class="gl-inline">
+                            <div class="u-s-m-b-30">
+                                <label class="gl-label" for="address-email">Stauts *</label>
+                                <input class="input-text input-text--primary-style" type="radio"  id="address-status" name="status">
+                            </div>
+                           
+                        </div>
+                        <button class="btn btn--e-brand-b-2" type="submit" name="submit" value="submit">SAVE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const newAddressButton = document.querySelector(".dash__custom-link");
+            const newAddressForm = document.getElementById("new-address-form");
+
+            newAddressButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                newAddressForm.style.display = "flex"; // Show the new address form
+            });
+        });
+    </script>
+{% endblock content %}

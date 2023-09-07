@@ -1,0 +1,114 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+        <!--====== App Content ======-->
+        <div class="app-content">
+
+            <!--====== Section  ======-->
+            <div class="u-s-p-b-60">
+
+
+                <!--====== Section Content ======-->
+                <div class="section__content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="filter__grid-wrapper u-s-m-t-30">
+                                    <div class="row">
+                                        
+                                        {% for p in products %}
+
+                                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item">
+                                            <div class="product-o product-o--hover-on product-o--radius">
+                                                <div class="product-o__wrap">
+
+                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{% url 'core:product-detail' p.pid %}">
+
+                                                        <img class="aspect__img" src="{{ p.image.url }}"></a>
+                                                    <div class="product-o__action-wrap">
+                                                        <ul class="product-o__action-list">
+                                                            <li>
+
+                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
+                                                                    <input type="hidden" value="1"  id="product-quantity" class="product-quantity-{{p.pid}}" >
+                                                                    <input type="hidden" value="{{ p.pid }}" class="product-id-{{p.pid}}" name="" id="">
+                                                                    <input type="hidden" value="{{ p.title }}" class="product-title-{{p.pid}}" name="" id="">
+                                                                    <input type="hidden" value="{{ p.price }}" class=" current-product-price-{{p.pid}} " name="" id="">
+                                                                    <input type="hidden" value="{{ p.image.url }}" class="product-image-{{p.pid}}" name="" id="">
+
+
+                
+                                                                    
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart" >
+                                                                        <button class="add-to-cart-btn" data-index="{{p.pid}}" id= "add-to-cart-btn" style="background-color: #a0a0a0; border:none;" ><i class="fas fa-plus-circle"></i></button>
+                                                                    </a></li>
+                                                            <li>
+
+                                                                <a data-modal="modal" data-modal-id="#add-to-wishlist" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist" >
+                                                                    <button class="add-to-wishlist" data-product-item="{{p.pid}}" id= "add-to-wishlist" style="background-color: #a0a0a0; border:none;" ><i class="fas fa-heart"></i></button>
+                                                                </a></li>
+                                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <span class="product-o__category">
+
+                                                    <a href="shop-side-version-2.html">{{p.category.title}}</a><br>
+                                    
+                                                        <a href="shop-side-version-2.html">{{p.vendor.title}}</a>
+                                                
+                                                </span>
+                                                
+                                                
+
+                                                <span class="product-o__name">
+
+                                                    <a href="{% url 'core:product-detail' p.pid %}">{{p.title}}</a></span>
+
+                                                    
+
+
+                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+
+                                                    <span class="product-o__review">(23)</span></div>
+
+                                                    <span class="product-o__price">
+                                                        <span class="current-product-price-{{p.pid}}">{{p.price}}</span>
+            
+                                                        <span class="product-o__discount">{{p.old_price}}</span>
+                                                    </span>
+                                                
+                                                
+                                            </div>
+                                            
+                                            </div>
+
+                                        {% endfor %}
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="load-more">
+
+                                    <button class="btn btn--e-brand" type="button">Load More</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====== End - Section Content ======-->
+            </div>
+            <!--====== End - Section  ======-->
+        </div>
+        <!--====== End - App Content ======-->
+
+{% endblock content %}

@@ -1,0 +1,177 @@
+
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <style>
+        {% comment %} body {
+            
+            padding: 20px;
+            
+        } {% endcomment %}
+
+        .invoice-box {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            font-size: 16px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #333;
+        }
+        
+        .invoice-box table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        
+        .invoice-box table th,
+        .invoice-box table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .invoice-box table th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .invoice-box table td:nth-child(2),
+        .invoice-box table td:nth-child(3),
+        .invoice-box table td:nth-child(4) {
+            text-align: center;
+        }
+        
+        .invoice-box table td:last-child {
+            text-align: right;
+        }
+        
+        .invoice-box .title {
+            font-size: 24px;
+            color: #333;
+        }
+        
+        .invoice-box .information {
+            margin-top: 20px;
+        }
+    
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .print-button,
+        .download-button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: orangered;
+            border-radius: 5px;
+            margin: 0 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .print-button:hover,
+        .download-button:hover {
+            background-color: #e68a00; /* Slightly darker orange on hover */
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .invoice-box table th,
+            .invoice-box table td {
+                padding: 8px;
+            }
+        
+            .invoice-box .title {
+                font-size: 20px;
+            }
+
+    
+        }
+        
+    </style>
+    <div class="invoice-box">
+        <table>
+            <tr class="top">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="{% static 'assets/images/logo/logo-1.png' %}" style="width: 100%; max-width: 100px" />
+                            </td>
+                            <td>
+                                <strong>Invoice #: </strong>125631<br />
+                                <strong>Created: </strong>oct 3, 2023<br />
+                                <strong>Due: </strong>nov 1, 2023
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+    
+            <tr class="information">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>Aausadhi</h3>
+                                Mahalaxmi-06, Siddhipur<br />
+                                Lalitpur, Nepal 44707
+                            </td>
+                            <td>
+                                <strong>Invoice For:</strong><br />
+                                {{request.user|title}}<br />
+                                {{user.email}}
+                                {{Address.address}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+    
+            <tr class="heading">
+                <th>Item</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+    
+            {% for product_id,item in cart_data.items %}
+                <tr class="item">
+                    <td>{{item.title}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.qty}}</td>
+                    <td>{% widthratio item.price 1 item.qty %}</td>
+                </tr>
+            {% endfor %}
+    
+            <tr class="total">
+                <td colspan="3">Total:</td>
+                <td>{{cart_total_amt| floatformat:0}}</td>
+            </tr>
+        </table>
+
+        <p style=" text-align: center;"><strong>Thanks for shopping from Aausadhi</strong></p>
+    </div>
+
+    <div class="buttons">
+        <button class="print-button" onclick="window.print()">Print Invoice</button>
+        <a class="download-button" href="{% url 'core:download_invoice' %}" target="_blank" download>Download PDF</a>
+
+    </div>
+    <br>
+    <br>
+
+{% endblock content %}

@@ -1,0 +1,451 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+        <!--====== App Content ======-->
+        <div class="app-content">
+
+            <!--====== Section 1 ======-->
+            <div class="u-s-p-t-90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+
+                            <!--====== Product Breadcrumb ======-->
+                            <div class="pd-breadcrumb u-s-m-b-30">
+                                <ul class="pd-breadcrumb__list">
+                                    <li class="has-separator">
+
+                                        <a href="index.hml">Home</a></li>
+                                    <li class="has-separator">
+
+                                        <a href="shop-side-version-2.html">Electronics</a></li>
+                                    <li class="has-separator">
+
+                                        <a href="shop-side-version-2.html">DSLR Cameras</a></li>
+                                    <li class="is-marked">
+
+                                        <a href="shop-side-version-2.html">Nikon Cameras</a></li>
+                                </ul>
+                            </div>
+                            <!--====== End - Product Breadcrumb ======-->
+
+
+                            <!--====== Product Detail Zoom ======-->
+                            <div class="pd u-s-m-b-30">
+                                <div class="slider-fouc pd-wrap">
+                                    <div id="pd-o-initiate">
+                                        {% for p in p_image %}
+                                            <div class="pd-o-img-wrap" data-src="{{p.images.url}}">
+
+                                                <img class="u-img-fluid" src="{{p.images.url}}" data-zoom-image="{{p.images.url}}" alt="">
+                                            </div>
+                                        {% endfor%}
+                                        
+                                    </div>
+
+                                    <span class="pd-text">Click for larger zoom</span>
+                                </div>
+                                <div class="u-s-m-t-15">
+                                    <div class="slider-fouc">
+                                        <div id="pd-o-thumbnail">
+                                            {%  for p in p_image %}
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{p.images.url}}" alt=""></div>
+                                                {% endfor %}
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--====== End - Product Detail Zoom ======-->
+                        </div>
+                        <div class="col-lg-7">
+
+                            <!--====== Product Right Side Details ======-->
+                            <div class="pd-detail">
+                                <div>
+
+                                    <span class="pd-detail__name">{{p.title}}</span></div>
+                                <div>
+                                    <div class="pd-detail__inline">
+
+                                        <span class="pd-detail__price" id="current-product-price">{{p.price}}</span>
+
+                                        <span class="pd-detail__discount">({{p.get_percentage| floatformat:0}}% OFF)</span><del class="pd-detail__del">{{p.old_price}}</del></div>
+                                </div>
+                                <div class="u-s-m-b-15">
+                                    <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+
+                                        <span class="pd-detail__review u-s-m-l-4">
+
+                                            <a data-click-scroll="#view-review">23 Reviews</a></span></div>
+                                </div>
+                                <div class="u-s-m-b-15">
+                                    <div class="pd-detail__inline">
+
+                                        <span class="pd-detail__stock">{{p.stock_count}} in stock</span>
+                                        <span class="pd-detail__left">SKU: {{p.sku}}</span>
+
+                                        </div>
+                                </div>
+                                <div class="u-s-m-b-15">
+
+                                    <span class="pd-detail__preview-desc">{{p.short_description}}</span><br>
+                                    <span class="pd-detail__preview-desc">Days in this Store: {{p.life}}</span>
+                                    <br>
+                                    <span class="pd-detail__preview-desc">Manufactured On: {{p.mfd| date:" d  M, Y "}}</span><br>
+                                    <span class="pd-detail__preview-desc">Tags: </span><br>
+                                    {% for tag in p.tag.all %}
+                                        <span class="pd-detail__click-wrap">
+                                        
+                                            <a href="{% url 'core:tags' tag.slug %}">#{{tag.name}} </a>,
+                                        
+
+                                        </span>
+                                    {% endfor %}
+                                
+                                </div>
+
+                                <div class="u-s-m-b-15">
+                                    
+                                    <div class="pd-detail__inline">
+
+                                        <span class="pd-detail__click-wrap">
+
+                                            <a href="{% url 'core:vendors-detail' p.vendor.vid %}">{{p.vendor}}</a>
+
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="u-s-m-b-15">
+                                    
+                                    <div class="pd-detail__inline">
+
+                                        <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
+
+                                            <a href="signin.html">Add to Wishlist</a>
+
+                                            <span class="pd-detail__click-count">(222)</span></span></div>
+                                </div>
+
+                                <div class="u-s-m-b-15">
+                                    <div class="pd-detail__inline">
+
+                                        <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
+
+                                            <a href="signin.html">Email me When the price drops</a>
+
+                                            <span class="pd-detail__click-count">(20)</span></span></div>
+                                </div>
+                                <div class="u-s-m-b-15">
+                                    <ul class="pd-social-list">
+                                        <li>
+
+                                            <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li>
+
+                                            <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li>
+
+                                            <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <li>
+
+                                            <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                        <li>
+
+                                            <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="u-s-m-b-15">
+                                    <form class="pd-detail__form">
+                                        
+                                        </div>
+                                        <div class="pd-detail-inline-2">
+                                            <div class="u-s-m-b-15">
+
+                                                <!--====== Input Counter ======-->
+                                                <div class="input-counter">
+
+                                                    <span class="input-counter__minus fas fa-minus"></span>
+                                                    <input class="input-counter__text input-counter--text-primary-style product-quantity-{{p.pid}} " type="text"  data-min="1" data-max="1000">
+
+
+                                                    <span class="input-counter__plus fas fa-plus"></span></div>
+                                                    {% comment %} <input type="hidden" value="1"  id="product-quantity" class="product-quantity-{{p.pid}}" > {% endcomment %}
+                                                    <input type="hidden" value="{{ p.pid }}" class="product-id-{{p.pid}}" name="" id="">
+                                                    <input type="hidden" value="{{ p.title }}" class="product-title-{{p.pid}}" name="" id="">
+                                                    <input type="hidden" value="{{ p.price }}" class=" current-product-price-{{p.pid}} " name="" id="">
+                                                    <input type="hidden" value="{{ p.image.url }}" class="product-image-{{p.pid}}" name="" id="">
+
+
+                                                <!--====== End - Input Counter ======-->
+                                            </div>
+                                            <div class="u-s-m-b-15">
+
+                                                <button class="btn btn--e-brand-b-2 add-to-cart-btn" type="submit" id="add-to-cart-btn" data-index="{{p.pid}}">Add to Cart</button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="u-s-m-b-15">
+
+                                    <span class="pd-detail__label u-s-m-b-8">Product Policy:</span>
+                                    <ul class="pd-detail__policy-list">
+                                        <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+
+                                            <span>Buyer Protection.</span></li>
+                                        <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+
+                                            <span>Full Refund if you don't receive your order.</span></li>
+                                        <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+
+                                            <span>Returns accepted if product not as described.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--====== End - Product Right Side Details ======-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--====== Product Detail Tab ======-->
+            <div class="u-s-p-y-90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pd-tab">
+                                <div class="u-s-m-b-30">
+                                    <ul class="nav pd-tab__list">
+                                        <li class="nav-item">
+
+                                            <a class="nav-link" data-toggle="tab" href="#pd-desc">DESCRIPTION</a></li>
+
+                                        <li class="nav-item">
+
+                                            <a class="nav-link active" id="view-review" data-toggle="tab" href="#pd-rev">REVIEW{{reviews.count|pluralize:"S"}}
+
+                                                <span>({{reviews.count}})</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content">
+
+                                    <!--====== Tab 1 ======-->
+                                    <div class="tab-pane" id="pd-desc">
+                                        <div class="pd-tab__desc">
+                                            <div class="u-s-m-b-15">
+                                                <p>{{p.description| safe}}</p>
+                                                <br>
+                                                <span class="pd-detail__preview-desc">Days in this Store: {{p.life}}</span><br>
+                                                <span class="pd-detail__preview-desc">Manufactured On: {{p.mfd| date:"d M, Y"}}</span>
+                                            </div>
+                            
+                                            <div class="u-s-m-b-30">
+                                                
+                                                <ul>
+                                                    <span class="pd-detail__label u-s-m-b-8">Product Policy:</span>
+
+                                                    <li><i class="fas fa-check u-s-m-r-8"></i>
+
+                                                        <span>Buyer Protection.</span></li>
+                                                    <li><i class="fas fa-check u-s-m-r-8"></i>
+
+                                                        <span>Full Refund if you don't receive your order.</span></li>
+                                                    <li><i class="fas fa-check u-s-m-r-8"></i>
+
+                                                        <span>Returns accepted if product not as described.</span></li>
+                                                </ul>
+                                            </div>
+                                
+                                        </div>
+                                    </div>
+                                    <!--====== End - Tab 1 ======-->
+
+
+
+                                    <!--====== Tab 2 ======-->
+                                    
+                                    <div class="tab-pane fade show active" id="pd-rev">
+                                        <div class="pd-tab__rev">
+                                            <div class="u-s-m-b-30">
+                                                <div class="pd-tab__rev-score">
+                                                    <div class="u-s-m-b-8">
+                                                        <h2>{{reviews.count}} Review{{reviews.count| pluralize}} - {{average_rating.rating|floatformat}} out of 5.0</h2>
+                                                    </div>
+                                                    <div class="gl-rating-style-2 u-s-m-b-8"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                                                    <div class="u-s-m-b-8">
+                                                        <h4>We want to hear from you!</h4>
+                                                    </div>
+
+                                                    <span class="gl-text">Tell us what you think about this item</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="u-s-m-b-30">
+                                                <form class="pd-tab__rev-f1">
+                                                    <div class="rev-f1__group">
+                                                        <div class="u-s-m-b-15">
+                                                            <h2>{{reviews.count}} Review{{reviews.count|pluralize}}</h2>
+                                                        </div>
+                                                        <div class="u-s-m-b-15">
+
+                                                            <label for="sort-review"></label><select class="select-box select-box--primary-style" id="sort-review">
+                                                                <option selected>Sort by: Best Rating</option>
+                                                                <option>Sort by: Worst Rating</option>
+                                                            </select></div>
+                                                    </div>
+                                                    <div class="rev-f1__review comment-list">
+
+                                                        {% for r in reviews %}
+                                                            <div class="review-o u-s-m-b-15">
+                                                                <div class="review-o__info u-s-m-b-8">
+
+                                                                <span class="review-o__name">{{r.user.username| title}}</span>
+
+                                                                <span class="review-o__date">{{r.date|date:"d M, Y"}}</span></div>
+                                                                <div class="review-o__rating gl-rating-style u-s-m-b-8">
+                                                                    {% for star in r.rating|ljust:r.rating %}
+                                                                        <i class="fas fa-star text: warnnig"></i>
+                                                                    {% endfor %}
+                                                                </div>
+                                                                <p class="review-o__text">{{r.review}}</p>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <strong class="text-success" id="review-response"></strong>
+                                            {% if request.user.is_authenticated %}
+                                            {% if make_review %}
+                                            
+                                                <div class="u-s-m-b-30">
+                                                <form class="pd-tab__rev-f2 hide-comment-form" id="commentForm" action="{% url 'core:ajax-add-review' p.pid %}" method= "POST">
+                                                    {% csrf_token %} 
+                                                    <h2 class="u-s-m-b-15">Add a Review</h2>
+                                                    
+                                                    <div class="u-s-m-b-30">
+                                                        <div class="rev-f2__table-wrap gl-scroll">
+                                                            {{review_form.rating}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="rev-f2__group">
+                                                        <div class="u-s-m-b-15">
+
+                                                            <label class="gl-label" for="reviewer-text">YOUR REVIEW </label>
+                                                            {{review_form.review}}
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div>
+
+                                                        <button class="btn btn--e-brand-shadow" type="submit">SUBMIT</button></div>
+                                                </form>
+                                                </div>
+                                            {% endif %}
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                    <!--====== End - Tab 2 ======-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--====== End - Product Detail Tab ======-->
+            <div class="u-s-p-b-90">
+
+                <!--====== Section Intro ======-->
+                <div class="section__intro u-s-m-b-46">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section__text-wrap">
+                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">CUSTOMER ALSO VIEWED</h1>
+
+                                    <span class="section__span u-c-grey">PRODUCTS THAT CUSTOMER VIEWED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====== End - Section Intro ======-->
+
+
+                <!--====== Section Content ======-->
+                <div class="section__content">
+                    <div class="container">
+                        <div class="slider-fouc">
+                            <div class="owl-carousel product-slider" data-item="4">
+                                {% for p in products %}
+                                    <div class="u-s-m-b-30">
+                                    <div class="product-o product-o--hover-on">
+                                        <div class="product-o__wrap">
+
+                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{% url 'core:product-detail' p.pid %}">
+
+                                                <img class="aspect__img" src="{{p.image.url}}" alt=""></a>
+                                            <div class="product-o__action-wrap">
+                                                <ul class="product-o__action-list">
+                                                    <li>
+
+                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View" href="{% url 'core:product-detail' p.pid %}"><i class="fas fa-search-plus"></i></a></li>
+                                                        <li>
+                                                            <input type="hidden" value="1"  id="product-quantity" class="product-quantity-{{p.pid}}" >
+                                                            <input type="hidden" value="{{ p.pid }}" class="product-id-{{p.pid}}" name="" id="">
+                                                            <input type="hidden" value="{{ p.title }}" class="product-title-{{p.pid}}" name="" id="">
+                                                            <input type="hidden" value="{{ p.price }}" class=" current-product-price-{{p.pid}} " name="" id="">
+                                                            <input type="hidden" value="{{ p.image.url }}" class="product-image-{{p.pid}}" name="" id="">
+
+
+
+                                                            
+                                                            <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart" >
+                                                                <button class="add-to-cart-btn" data-index="{{p.pid}}" id= "add-to-cart-btn" style="background-color: #a0a0a0; border:none;" ><i class="fas fa-plus-circle"></i></button>
+                                                            </a></li>
+                                                    <li>
+
+                                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                    <li>
+
+                                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>r
+
+                                        <span class="product-o__category">
+
+                                            <a href="{% url 'core:subcategory-list' p.category.cid %}">{{p.category.title}}</a></span>
+
+                                        <span class="product-o__name">
+
+                                            <a href="{% url 'core:product-detail' p.pid %}">{{p.title}}</a></span>
+                                        <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+
+                                            <span class="product-o__review">(20)</span></div>
+
+                                        <span class="product-o__price current-product-price-{{p.pid}}">{{p.price}}
+
+                                            <span class="product-o__discount">{{p.old_price}}</span></span>
+                                    </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====== End - Section Content ======-->
+            </div>
+            <!--====== End - Section 1 ======-->
+        </div>
+        <!--====== End - App Content ======-->
+
+{% endblock content %}
